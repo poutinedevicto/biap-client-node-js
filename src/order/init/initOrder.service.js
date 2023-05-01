@@ -105,7 +105,6 @@ class InitOrderService {
      */
     async updateOrder(response, dbResponse) {
 
-        console.log("update order-------------------->",dbResponse);
         if (response?.message?.order && dbResponse) {
             dbResponse = dbResponse?.toJSON();
 

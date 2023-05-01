@@ -19,7 +19,6 @@ class UpdateOrderService {
     async update(orderRequest) {
         try {
 
-            console.log("orderRequest-------------->",orderRequest);
 
             const orderDetails = await getOrderById(orderRequest.message.order_id);
 
@@ -31,7 +30,6 @@ class UpdateOrderService {
                 cityCode:orderDetails.city
             });
 
-            console.log("context-------------->",context);
 
             const { message = {} } = orderRequest || {};
             const { update_target,order } = message || {};
@@ -59,7 +57,6 @@ class UpdateOrderService {
         try {
             let protocolUpdateResponse = await onUpdateStatus(messageId);
 
-            console.log("protocolUpdateResponse-------------->",protocolUpdateResponse)
             if (!(protocolUpdateResponse && protocolUpdateResponse.length)) {
                 const contextFactory = new ContextFactory();
                 const context = contextFactory.create({
@@ -107,7 +104,6 @@ class UpdateOrderService {
                         //get item from db and update state for item
                         orderSchema.items = op;
 
-                        console.log("orderSchema.items ===",orderSchema.items )
                         await addOrUpdateOrderWithTransactionId(
                             protocolUpdateResponse.context.transaction_id,
                             { ...orderSchema }

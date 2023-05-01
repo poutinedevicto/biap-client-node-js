@@ -49,7 +49,6 @@ class OrderStatusService {
             orders.map(async order => {
                 try {
 
-                    console.log("order------------------>",order);
 
 
 
@@ -73,9 +72,7 @@ class OrderStatusService {
         try {
             let protocolOrderStatusResponse = await onOrderStatus(messageId);
 
-            // console.log("protocolOrderStatusResponse------------>",protocolOrderStatusResponse);
-            // console.log("protocolOrderStatusResponse------------>",protocolOrderStatusResponse.fulfillments);
-            console.log("protocolOrderStatusResponse------------>",JSON.stringify(protocolOrderStatusResponse));
+       
 
             if(protocolOrderStatusResponse && protocolOrderStatusResponse.length)
                 return protocolOrderStatusResponse?.[0];
@@ -108,17 +105,13 @@ class OrderStatusService {
                     try {
                         const onOrderStatusResponse = await this.onOrderStatus(messageId);
 
-                        // console.log("onOrderStatusResponse------------->",onOrderStatusResponse)
-                        // console.log("onOrderStatusResponse------------->",onOrderStatusResponse.message.order.items)
-                        // console.log("onOrderStatusResponse------------->",onOrderStatusResponse.message.order.fulfillments)
+                        
 
 
                         let fulfillmentItems =onOrderStatusResponse.message?.order?.fulfillments?.map((fulfillment,i)=>{
-                            // console.log("fulfillment----------------->",fulfillment)
                             let temp = onOrderStatusResponse?.message?.order?.items?.find(element=> element.fulfillment_id === fulfillment.id)
                             if(temp){
                                 temp.state = fulfillment.state?.descriptor?.code??""
-                                // console.log("temp------------------>",temp);
                                 return temp;
                             }
                         })

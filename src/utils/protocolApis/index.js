@@ -299,7 +299,6 @@ const onUpdateStatus = async (messageId) => {
  */
 const protocolSelect = async (data) => {
 
-    console.log("protocolSelect-------------------------",data);
     const apiCall = new HttpRequest(
         process.env.PROTOCOL_BASE_URL,
         PROTOCOL_API_URLS.SELECT,

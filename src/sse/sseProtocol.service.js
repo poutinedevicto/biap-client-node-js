@@ -65,7 +65,6 @@ class SseProtocol {
             const { messageId } = response;
 
 
-            console.log(`[DEBUG] onInit---${messageId}--${response}`)
             sendSSEResponse(
                 messageId,
                 PROTOCOL_CONTEXT.ON_INIT,
