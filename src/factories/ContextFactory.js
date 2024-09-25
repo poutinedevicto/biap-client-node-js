@@ -64,7 +64,9 @@ class ContextFactory {
             country: this.country,
             city: this.getCity(city,state,cityCode) ,
             action: action,
-            core_version: PROTOCOL_VERSION.v_1_0_0,
+            //LOCAVORA_CHANGE
+            //core_version: PROTOCOL_VERSION.v_1_0_0,
+            version: PROTOCOL_VERSION.v_1_0_0,
             bap_id: this.bapId,
             bap_uri: this.bapUrl,
             transaction_id: transactionId,
