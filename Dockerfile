@@ -1,5 +1,6 @@
 # Name the node stage "builder"
-FROM node:18 AS builder
+# LOCAVORA adding -slim to reduce image size
+FROM node:18-slim AS builder
 
 ARG PORT
 # NODE_ENV = dev, prod
