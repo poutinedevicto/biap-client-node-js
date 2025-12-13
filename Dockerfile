@@ -124,12 +124,26 @@ ENV RAZORPAY_KEY_ID ${RAZORPAY_KEY_ID}
 ENV RAZORPAY_WEBHOOK_SECRET ${RAZORPAY_WEBHOOK_SECRET}
 
 # Set working directory
-WORKDIR /build
-COPY package*.json yarn.lock ./
+WORKDIR /app
+
+# LOCAVORA - error SyntaxError: Invalid value type 1146:0 in /build/yarn.lock
+# COPY package*.json yarn.lock ./
+COPY package*.json ./
 
 # install node modules
-RUN yarn
+# LOCAVORA
+#RUN yarn
+RUN yarn install --immutable --production
+# LOCAVORA les copier dans le builder pour seulement les recopier dans l'image finale ensuite?
+COPY ./src ./src
 
 # Copy all files from current directory to working dir in image
-COPY . .
-CMD [ "yarn", "start" ]
+# LOCAVORA COPY . .
+# LOCAVORA CMD [ "yarn", "start" ]
+
+FROM alpine:latest
+WORKDIR /app
+COPY --from=builder /app/src ./src 
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules ./node_modules  
+CMD ["node", "src/app.js"]

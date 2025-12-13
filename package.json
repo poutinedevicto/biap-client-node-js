@@ -43,13 +43,7 @@
     "start": "node src/app.js",
     "lint:fix": "eslint src/*.js --fix",
     "lint": "eslint src/*.js",
-    "test": "lint-staged",
-    "prepare": "husky install"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
+    "test": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -71,7 +65,6 @@
     "eslint": "~7.32.0 || ^8.2.0",
     "eslint-config-airbnb-base": "~15.0.0",
     "eslint-plugin-import": "~2.25.2",
-    "husky": "~9.1.5",
     "js-beautify": "~1.8.9",
     "lint-staged": "~15.2.9",
     "nodemon": "~1.18.9",
