@@ -4,7 +4,7 @@ pipeline {
     // LOCAVORA - low idleMinutes because we ask for a lot of resources
     kubernetes {
       label 'jenkins-agent-kaniko-remote-harbor'
-      idleMinutes 5 // Keep the Pod alive for n minutes after the build
+      idleMinutes 1 // Keep the Pod alive for n minutes after the build
       yaml '''
 apiVersion: v1
 kind: Pod
@@ -33,13 +33,13 @@ spec:
         mountPath: /kaniko/.docker
         readOnly: true
 
-    #resources:
-    #  requests:
-    #    memory: "2Gi"
-    #    cpu:    "1"
-    #    # LOCAVORA - max total ephemeral-storage per node under GKE 
-    #    #            is 10Gi, and the other container (jnlp) requests 1Gi 
-    #    ephemeral-storage: 9Gi
+    resources:
+      requests:
+        memory: "3Gi"
+        cpu:    "1"
+        # LOCAVORA - max total ephemeral-storage per node under GKE 
+        #            is 10Gi, and the other container (jnlp) requests 1Gi 
+        ephemeral-storage: 9Gi
 
   restartPolicy: Never
 '''   
