@@ -4,7 +4,7 @@ pipeline {
     // LOCAVORA - low idleMinutes because we ask for a lot of resources
     kubernetes {
       label 'jenkins-agent-kaniko-remote-harbor'
-      idleMinutes 1 // Keep the Pod alive for n minutes after the build
+      idleMinutes 5 // Keep the Pod alive for n minutes after the build
       yaml '''
 apiVersion: v1
 kind: Pod
@@ -16,9 +16,6 @@ spec:
       secret:
         # Secret provient de Vault via un External Secret
         secretName: harbor-beckn-locavora-rw-external-secret
-    # Volume pour stocker temporairement le contexte (code source) et l'image de sortie
-    #- name: shared-data
-    #  emptyDir: {}
   
   containers:  
   - name: kaniko
