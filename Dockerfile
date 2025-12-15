@@ -134,8 +134,8 @@ COPY package*.json ./
 # LOCAVORA
 #RUN yarn
 RUN yarn install --immutable --production
-# LOCAVORA les copier dans le builder pour seulement les recopier dans l'image finale ensuite?
-COPY ./src ./src
+# LOCAVORA les copie dans le builder pour seulement les recopier dans l'image finale ensuite?
+#COPY ./src ./src
 
 # Copy all files from current directory to working dir in image
 # LOCAVORA COPY . .
@@ -143,7 +143,7 @@ COPY ./src ./src
 
 FROM alpine:latest
 WORKDIR /app
-COPY --from=builder /app/src ./src 
+COPY ./src ./src
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/node_modules ./node_modules  
 CMD ["node", "src/app.js"]
